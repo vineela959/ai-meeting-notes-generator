@@ -48,6 +48,12 @@ Postman / API Client
 
 ---
 
+## 🖼️ Workflow Diagram
+
+![Workflow Diagram](./workflow.png)
+
+---
+
 ## ✨ Features
 
 | Feature | Description |
