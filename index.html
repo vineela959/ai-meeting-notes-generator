@@ -91,15 +91,6 @@ border-radius:10px;
 border:1px solid #1E2D45;
 }
 
-/* FLOW */
-.flow{
-background:#111827;
-padding:15px;
-border-radius:10px;
-text-align:center;
-font-family:monospace;
-}
-
 /* TAGS */
 .tag span{
 display:inline-block;
@@ -111,30 +102,135 @@ border-radius:20px;
 font-size:13px;
 }
 
-/* DEMO */
-.demo{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-}
-
-.demo-box{
-background:#111827;
-padding:15px;
-border-radius:10px;
-border:1px solid #1E2D45;
-}
-
-.demo-box strong{
-color:#00FF88;
-}
-
 /* FOOTER */
 footer{
 text-align:center;
 padding:40px;
 color:#8892A4;
 border-top:1px solid #1E2D45;
+}
+
+/* ===== STRIPE FLOW + DEMO ===== */
+.section-flow{
+background:#111827;
+border:1px solid #1E2D45;
+border-radius:14px;
+padding:30px;
+overflow:hidden;
+position:relative;
+margin-top:20px;
+}
+
+.glow-line{
+position:absolute;
+top:50%;
+left:-100%;
+height:2px;
+width:100%;
+background:linear-gradient(90deg,transparent,#00FF88,transparent);
+animation:slide 3s infinite;
+opacity:0.5;
+}
+
+@keyframes slide{
+0%{left:-100%}
+100%{left:100%}
+}
+
+.flow{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:18px;
+flex-wrap:wrap;
+position:relative;
+z-index:2;
+}
+
+.node{
+background:#141C2E;
+border:1px solid #1E2D45;
+padding:14px 18px;
+border-radius:12px;
+font-family:monospace;
+font-size:14px;
+color:#F0F4FF;
+animation:float 3s ease-in-out infinite;
+transition:0.3s;
+}
+
+.node:hover{
+border-color:#00FF88;
+box-shadow:0 0 20px rgba(0,255,136,0.2);
+transform:translateY(-3px);
+}
+
+.arrow{
+color:#00FF88;
+font-size:18px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%,100%{opacity:1}
+50%{opacity:0.3}
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-4px)}
+}
+
+/* DEMO */
+.demo-wrap{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:25px;
+}
+
+.demo-box{
+background:#141C2E;
+border:1px solid #1E2D45;
+border-radius:12px;
+padding:20px;
+transition:0.3s;
+}
+
+.demo-box:hover{
+border-color:#00FF88;
+box-shadow:0 0 15px rgba(0,255,136,0.1);
+transform:translateY(-2px);
+}
+
+.demo-title{
+color:#00FF88;
+font-family:monospace;
+font-size:14px;
+margin-bottom:10px;
+}
+
+.demo-text{
+color:#8892A4;
+font-size:14px;
+line-height:1.6;
+}
+
+.typing{
+border-right:2px solid #00FF88;
+white-space:nowrap;
+overflow:hidden;
+display:inline-block;
+animation:typing 3s steps(40,end), blink 0.7s infinite;
+}
+
+@keyframes typing{
+from{width:0}
+to{width:100%}
+}
+
+@keyframes blink{
+50%{border-color:transparent}
 }
 </style>
 
@@ -156,7 +252,8 @@ border-top:1px solid #1E2D45;
 <h1>AI Meeting Notes <span>Generator</span></h1>
 
 <p>
-Automates meeting documentation by converting raw transcripts into structured summaries, decisions, and action items using local AI (Ollama + n8n).
+Automates meeting documentation using local AI (Ollama) + n8n workflow automation.
+Transforms raw transcripts into structured summaries, decisions, and action items.
 </p>
 
 </div>
@@ -166,9 +263,35 @@ Automates meeting documentation by converting raw transcripts into structured su
 
 <h2>📌 Overview</h2>
 <p>
-This project builds an end-to-end AI automation pipeline that converts unstructured meeting text into structured insights using local LLM (Ollama) and workflow automation (n8n).
+End-to-end AI automation system that removes manual meeting note-taking by converting conversations into structured insights using a local LLM pipeline.
 </p>
 
+</div>
+
+<!-- ARCHITECTURE -->
+<div class="section-flow">
+
+<h2>🏗️ Architecture</h2>
+
+<div class="glow-line"></div>
+
+<div class="flow">
+
+<div class="node">📩 Postman</div>
+<div class="arrow">→</div>
+
+<div class="node">🌐 Webhook (n8n)</div>
+<div class="arrow">→</div>
+
+<div class="node">🧠 Ollama LLM</div>
+<div class="arrow">→</div>
+
+<div class="node">⚙️ JS Parser</div>
+<div class="arrow">→</div>
+
+<div class="node">📊 Google Sheets</div>
+
+</div>
 </div>
 
 <!-- IMPACT -->
@@ -181,17 +304,6 @@ This project builds an end-to-end AI automation pipeline that converts unstructu
 <div class="card">Improves decision tracking</div>
 <div class="card">Automates action item extraction</div>
 <div class="card">Reduces productivity overhead</div>
-</div>
-
-</div>
-
-<!-- WORKFLOW -->
-<div class="section">
-
-<h2>🏗️ Workflow</h2>
-
-<div class="flow">
-Postman → Webhook (n8n) → Ollama LLM → JavaScript → Google Sheets
 </div>
 
 </div>
@@ -213,31 +325,32 @@ Postman → Webhook (n8n) → Ollama LLM → JavaScript → Google Sheets
 </div>
 
 <!-- DEMO -->
-<div class="section">
+<div class="section-flow">
 
-<h2>🚀 Demo</h2>
+<h2>🚀 Live Demo</h2>
 
-<div class="demo">
+<div class="glow-line"></div>
+
+<div class="demo-wrap">
 
 <div class="demo-box">
-<strong>Input</strong>
-<p>
+<div class="demo-title">Input</div>
+<div class="demo-text typing">
 John will finish login page by Friday. Sarah confirmed API is ready. Mark will review designs tomorrow.
-</p>
+</div>
 </div>
 
 <div class="demo-box">
-<strong>Output</strong>
-<p>
+<div class="demo-title">Output</div>
+<div class="demo-text">
 ✔ Summary generated<br>
 ✔ Action items extracted<br>
 ✔ Owners assigned<br>
 ✔ Deadlines identified
-</p>
+</div>
 </div>
 
 </div>
-
 </div>
 
 <!-- TECH STACK -->
