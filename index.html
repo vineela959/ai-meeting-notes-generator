@@ -2,31 +2,24 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Meeting Notes Generator</title>
+<title>AI Meeting Notes Generator | Portfolio Project</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
 body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
 background:#0A0F1E;
 color:#F0F4FF;
 line-height:1.6;
 }
 
 .container{
-max-width:1100px;
+max-width:1050px;
 margin:auto;
-padding:30px;
+padding:40px 20px;
 }
 
 nav{
@@ -38,63 +31,58 @@ border-bottom:1px solid #1E2D45;
 }
 
 .logo{
-font-family:monospace;
-font-size:24px;
-font-weight:bold;
 color:#00FF88;
+font-weight:bold;
+font-size:20px;
 }
 
 nav a{
-text-decoration:none;
-color:#0A0F1E;
 background:#00FF88;
-padding:10px 18px;
+color:#0A0F1E;
+padding:10px 16px;
 border-radius:8px;
+text-decoration:none;
 font-weight:bold;
 }
 
 .hero{
-min-height:70vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
 text-align:center;
-padding:60px 20px;
+padding:90px 20px;
 }
 
-h1{
-font-size:50px;
-margin-bottom:20px;
+.hero h1{
+font-size:44px;
+margin-bottom:10px;
 }
 
-.highlight{
+.hero span{
 color:#00FF88;
 }
 
 .hero p{
-max-width:650px;
+max-width:700px;
+margin:auto;
 color:#8892A4;
-font-size:20px;
+font-size:18px;
 }
 
 .btn{
 display:inline-block;
-margin-top:30px;
-padding:14px 25px;
+margin-top:25px;
 background:#00FF88;
 color:#0A0F1E;
+padding:12px 22px;
 border-radius:8px;
-text-decoration:none;
 font-weight:bold;
+text-decoration:none;
 }
 
-.card{
+.section{
 background:#141C2E;
 border:1px solid #1E2D45;
-border-radius:15px;
-padding:30px;
-margin:30px 0;
+padding:25px;
+margin:25px 0;
+border-radius:12px;
 }
 
 h2{
@@ -102,334 +90,188 @@ color:#00FF88;
 margin-bottom:15px;
 }
 
+.flow{
+background:#111827;
+padding:18px;
+border-radius:10px;
+font-family:monospace;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.card{
+background:#111827;
+padding:15px;
+border-radius:10px;
+border:1px solid #1E2D45;
+}
+
 ul{
 padding-left:20px;
 }
 
-pre{
-background:#111827;
-padding:20px;
-border-radius:10px;
-overflow:auto;
-color:#cbd5e1;
-}
-
-.flow{
-background:#111827;
-padding:25px;
-border-radius:12px;
-text-align:center;
-font-family:monospace;
-font-size:18px;
-}
-
 img{
 width:100%;
-margin-top:20px;
-border-radius:12px;
+border-radius:10px;
+margin-top:15px;
 border:1px solid #1E2D45;
 }
 
-.tags span{
+.tag span{
 display:inline-block;
 background:#1E2D45;
 color:#00FF88;
-padding:8px 15px;
+padding:6px 12px;
 margin:5px;
 border-radius:20px;
+font-size:13px;
 }
 
 footer{
 text-align:center;
 padding:40px;
 color:#8892A4;
+border-top:1px solid #1E2D45;
 }
-
 </style>
 
 </head>
-
 
 <body>
 
 <div class="container">
 
-
+<!-- NAV -->
 <nav>
-
-<div class="logo">
-meeting.ai
-</div>
-
-<a href="https://github.com/YOUR_USERNAME/YOUR_REPO">
-GitHub →
-</a>
-
+<div class="logo">AI Meeting Notes</div>
+<a href="https://github.com/YOUR_USERNAME/YOUR_REPO">GitHub Repo</a>
 </nav>
 
+<!-- HERO -->
+<div class="hero">
 
-<section class="hero">
-
-<h1>
-AI Meeting Notes <span class="highlight">Generator</span>
-</h1>
+<h1>AI Meeting Notes <span>Generator</span></h1>
 
 <p>
-Automatically transform meeting transcripts into structured,
-actionable notes using n8n, Ollama and JavaScript automation.
+End-to-end AI automation system that converts raw meeting transcripts into structured summaries, decisions, and action items using local LLM (Ollama) + n8n workflow automation.
 </p>
 
-<a class="btn" href="#workflow">
-View Workflow
-</a>
-
-</section>
-
-<section class="card">
-
-<h2>📖 Overview</h2>
-
-<p>
-AI Meeting Notes Generator is a privacy-focused automation pipeline
-that converts unstructured meeting transcripts into structured notes
-using Ollama local LLM.
-
-It extracts summaries, key points, decisions, and action items with
-owners and deadlines, then stores the output in Google Sheets through
-an n8n workflow.
-</p>
-
-</section>
-
-
-<section class="card" id="workflow">
-
-<h2>🏗️ Architecture</h2>
-
-<div class="flow">
-
-Postman / API Client
-
-↓
-
-Webhook Trigger (n8n)
-
-↓
-
-Ollama Local LLM
-
-↓
-
-JavaScript Transformation
-
-↓
-
-Google Sheets Storage
+<a class="btn" href="#overview">View Project</a>
 
 </div>
 
+<!-- OVERVIEW -->
+<div class="section" id="overview">
 
-<img src="workflow.png" alt="AI Meeting Notes Workflow">
+<h2>📌 Project Overview</h2>
 
-</section>
+<p>
+This project automates meeting documentation using a fully self-hosted AI pipeline.
+It removes manual note-taking by extracting structured insights from raw conversations and storing them in Google Sheets.
+</p>
 
+</div>
 
+<!-- ARCHITECTURE -->
+<div class="section">
 
-<section class="card">
+<h2>🏗️ System Architecture</h2>
 
-<h2>✨ Features</h2>
+<div class="flow">
+Postman → Webhook (n8n) → Ollama LLM → JavaScript Parser → Google Sheets
+</div>
 
-<ul>
+<img src="workflow.png" alt="workflow architecture">
 
-<li>Webhook based meeting transcript input</li>
+</div>
 
-<li>AI processing using local Ollama LLM</li>
+<!-- FEATURES -->
+<div class="section">
 
-<li>Automatic summary generation</li>
+<h2>✨ Key Features</h2>
 
-<li>Key points extraction</li>
+<div class="grid">
 
-<li>Decision tracking</li>
+<div class="card">Webhook-based API trigger</div>
+<div class="card">Local LLM processing (Ollama)</div>
+<div class="card">Structured meeting summarization</div>
+<div class="card">Action item extraction</div>
+<div class="card">Owner & deadline detection</div>
+<div class="card">Automated Google Sheets storage</div>
 
-<li>Action items with owner and deadline</li>
+</div>
 
-<li>JavaScript data parsing and formatting</li>
+</div>
 
-<li>Google Sheets automatic storage</li>
-
-<li>Privacy-first local AI workflow</li>
-
-</ul>
-
-</section>
-
-
-
-<section class="card">
+<!-- TECH STACK -->
+<div class="section">
 
 <h2>⚙️ Tech Stack</h2>
 
-<div class="tags">
-
+<div class="tag">
 <span>n8n</span>
-
 <span>Ollama</span>
-
 <span>JavaScript</span>
-
 <span>Google Sheets</span>
-
 <span>Postman</span>
+</div>
 
 </div>
 
-</section>
+<!-- WORKFLOW STEPS -->
+<div class="section">
 
-
-
-<section class="card">
-
-<h2>📥 Input Format</h2>
-
-<pre>
-{
-  "meeting_text": 
-  "John will finish login page by Friday.
-   Sarah confirmed API is ready."
-}
-</pre>
-
-</section>
-
-<section class="card">
-
-<h2>📤 Output Format</h2>
-
-<pre>
-{
-  "summary": "",
-  "key_points": [],
-  "decisions": [],
-  "action_items": [
-    {
-      "task": "",
-      "owner": "",
-      "deadline": ""
-    }
-  ]
-}
-</pre>
-
-</section>
-
-
-
-<section class="card">
-
-<h2>🚀 Workflow Steps</h2>
+<h2>🔄 Workflow</h2>
 
 <ul>
-
-<li>Send meeting transcript using Postman</li>
-
-<li>Webhook receives the request in n8n</li>
-
-<li>Ollama processes transcript and generates JSON notes</li>
-
-<li>JavaScript node parses and formats the response</li>
-
-<li>Google Sheets stores final meeting notes</li>
-
+<li>User sends meeting transcript via API (Postman)</li>
+<li>Webhook receives data in n8n</li>
+<li>Ollama processes and extracts insights</li>
+<li>JavaScript formats structured output</li>
+<li>Google Sheets stores final results</li>
 </ul>
 
-</section>
+</div>
 
+<!-- IMPACT -->
+<div class="section">
 
-
-<section class="card">
-
-<h2>🛠️ Customization</h2>
+<h2>📊 Project Impact</h2>
 
 <ul>
-
-<li>Change Ollama model based on requirements</li>
-
-<li>Modify prompt to extract different information</li>
-
-<li>Replace Google Sheets with other storage systems</li>
-
-<li>Add notifications through email or messaging platforms</li>
-
+<li>Reduces manual meeting documentation effort</li>
+<li>Improves clarity of action items</li>
+<li>Automates workflow end-to-end</li>
+<li>Ensures structured decision tracking</li>
 </ul>
 
-</section>
+</div>
 
-
-
-<section class="card">
-
-<h2>📌 Use Cases</h2>
-
-<ul>
-
-<li>Engineering standups</li>
-
-<li>Client meetings</li>
-
-<li>Weekly team syncs</li>
-
-<li>Interview discussions</li>
-
-<li>Project planning meetings</li>
-
-</ul>
-
-</section>
-
-
-
-<section class="card">
+<!-- PRIVACY -->
+<div class="section">
 
 <h2>🔒 Privacy</h2>
 
 <p>
-
-All AI processing is performed locally using Ollama.
-Meeting transcripts are not sent to external AI services.
-
+This system uses a local LLM (Ollama), ensuring all data remains on-device.
+No external AI APIs are used.
 </p>
-
-</section>
-
-
-
-<section class="card">
-
-<h2>📄 License</h2>
-
-<p>
-
-MIT License — free to use, modify, and distribute.
-
-</p>
-
-</section>
-
-
-
-<footer>
-
-Built with n8n + Ollama + JavaScript
-
-<br>
-
-AI Meeting Notes Generator
-
-</footer>
-
 
 </div>
 
+<!-- FOOTER -->
+<footer>
+
+Built for AI Automation Portfolio • n8n + Ollama + JavaScript
+
+</footer>
+
+</div>
 
 </body>
 
