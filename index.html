@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,7 +15,7 @@ color:#F0F4FF;
 }
 
 .container{
-max-width:1000px;
+max-width:900px;
 margin:auto;
 padding:60px 20px;
 }
@@ -24,18 +25,17 @@ nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:60px;
+margin-bottom:50px;
 }
 
 .logo{
 color:#00FF88;
 font-weight:700;
-font-size:18px;
 }
 
 nav a{
-color:#0A0F1E;
 background:#00FF88;
+color:#0A0F1E;
 padding:10px 14px;
 border-radius:8px;
 text-decoration:none;
@@ -45,12 +45,12 @@ font-weight:600;
 /* HERO */
 .hero{
 text-align:center;
-margin-bottom:70px;
+margin-bottom:60px;
 }
 
 .hero h1{
-font-size:44px;
-margin-bottom:15px;
+font-size:40px;
+margin-bottom:10px;
 }
 
 .hero span{
@@ -64,19 +64,26 @@ margin:auto;
 font-size:18px;
 }
 
-/* GRID */
+/* SECTION */
+h2{
+color:#00FF88;
+margin-top:50px;
+}
+
+/* CARDS */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
-margin:40px 0;
+margin-top:20px;
 }
 
 .card{
 background:#111827;
 border:1px solid #1E2D45;
-padding:18px;
+padding:16px;
 border-radius:12px;
+color:#C9D1D9;
 }
 
 /* DEMO */
@@ -84,19 +91,21 @@ border-radius:12px;
 background:#111827;
 border:1px solid #1E2D45;
 border-radius:14px;
-padding:25px;
-margin-top:40px;
+padding:20px;
+margin-top:20px;
 }
 
 textarea{
 width:100%;
-height:120px;
+height:130px;
 background:#0A0F1E;
 color:#F0F4FF;
 border:1px solid #1E2D45;
 border-radius:10px;
 padding:12px;
 font-family:monospace;
+resize:vertical;
+outline:none;
 }
 
 button{
@@ -113,22 +122,19 @@ cursor:pointer;
 margin-top:15px;
 color:#8892A4;
 font-size:14px;
+line-height:1.5;
 }
 
-/* SECTION TITLE */
-h2{
-color:#00FF88;
-margin-top:60px;
-}
-
+/* FOOTER */
 footer{
 text-align:center;
+margin-top:70px;
 color:#8892A4;
-margin-top:80px;
 border-top:1px solid #1E2D45;
 padding:30px;
 }
 </style>
+
 </head>
 
 <body>
@@ -143,18 +149,18 @@ padding:30px;
 
 <!-- HERO -->
 <div class="hero">
-<h1>Turn Meetings into <span>Actionable Notes</span></h1>
+<h1>AI Meeting Notes <span>Generator</span></h1>
 <p>
-A local AI automation system that converts raw meeting transcripts into structured summaries, decisions, and tasks using Ollama + n8n.
+Convert meeting transcripts into structured summaries, decisions, and tasks using local AI (Ollama + n8n automation).
 </p>
 </div>
 
 <!-- VALUE -->
-<h2>Why this exists</h2>
+<h2>Why this project</h2>
 <div class="grid">
-<div class="card">Removes manual meeting note writing</div>
+<div class="card">Removes manual note-taking</div>
 <div class="card">Extracts action items automatically</div>
-<div class="card">Runs fully on local AI (Ollama)</div>
+<div class="card">Runs on local AI (Ollama)</div>
 <div class="card">Stores results in Google Sheets</div>
 </div>
 
@@ -163,15 +169,13 @@ A local AI automation system that converts raw meeting transcripts into structur
 
 <div class="demo">
 
-<textarea id="input">
+<textarea id="inputBox">
 John will finish login page by Friday. Sarah confirmed API is ready.
 </textarea>
 
-<br/>
+<button onclick="generate()">Generate Notes</button>
 
-<button onclick="run()">Generate Notes</button>
-
-<div class="output" id="out">
+<div class="output" id="outputBox">
 Waiting for input...
 </div>
 
@@ -186,18 +190,22 @@ Waiting for input...
 <div class="card">Google Sheets API</div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-Built for AI Automation Portfolio • No cloud AI dependency
+Built for AI Automation Portfolio • Clean working demo version
 </footer>
 
 </div>
 
 <script>
-function run(){
-const text = document.getElementById("input").value;
+function generate(){
+const text = document.getElementById("inputBox").value;
 
-document.getElementById("out").innerHTML =
-"✔ Summary generated<br>✔ Action items extracted<br>✔ Owners identified<br><br><b>Input:</b><br>" + text;
+document.getElementById("outputBox").innerHTML =
+"✔ Summary generated<br>" +
+"✔ Action items extracted<br>" +
+"✔ Owners identified<br><br>" +
+"<b>Input:</b><br>" + text;
 }
 </script>
 
