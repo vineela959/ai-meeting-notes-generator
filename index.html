@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AI Meeting Notes Generator</title>
-
 <style>
 body{
 margin:0;
@@ -12,13 +11,11 @@ font-family:Arial, sans-serif;
 background:#0A0F1E;
 color:#F0F4FF;
 }
-
 .container{
 max-width:900px;
 margin:auto;
 padding:50px 20px;
 }
-
 /* NAV */
 nav{
 display:flex;
@@ -26,12 +23,10 @@ justify-content:space-between;
 align-items:center;
 margin-bottom:40px;
 }
-
 .logo{
 color:#00FF88;
 font-weight:700;
 }
-
 nav a{
 background:#00FF88;
 color:#0A0F1E;
@@ -40,35 +35,29 @@ border-radius:8px;
 text-decoration:none;
 font-weight:600;
 }
-
 /* HERO */
 .hero{
 text-align:center;
 margin-bottom:50px;
 }
-
 .hero h1{
 font-size:36px;
 margin-bottom:10px;
 }
-
 .hero span{
 color:#00FF88;
 }
-
 .hero p{
 color:#8892A4;
 max-width:600px;
 margin:auto;
 font-size:16px;
 }
-
 /* SECTION TITLE */
 h2{
 color:#00FF88;
 margin-top:40px;
 }
-
 /* GRID */
 .grid{
 display:grid;
@@ -76,7 +65,6 @@ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
 margin-top:15px;
 }
-
 .card{
 background:#111827;
 border:1px solid #1E2D45;
@@ -84,7 +72,6 @@ padding:15px;
 border-radius:10px;
 color:#C9D1D9;
 }
-
 /* DEMO */
 .demo{
 background:#111827;
@@ -93,7 +80,6 @@ border-radius:12px;
 padding:20px;
 margin-top:15px;
 }
-
 textarea{
 width:100%;
 height:130px;
@@ -105,8 +91,8 @@ padding:10px;
 font-family:monospace;
 resize:vertical;
 outline:none;
+box-sizing:border-box;
 }
-
 button{
 margin-top:10px;
 background:#00FF88;
@@ -116,14 +102,28 @@ border-radius:8px;
 font-weight:700;
 cursor:pointer;
 }
-
+button:hover{
+opacity:0.85;
+}
 .output{
 margin-top:15px;
-color:#8892A4;
+color:#C9D1D9;
 font-size:14px;
-line-height:1.5;
+line-height:1.6;
 }
-
+.output b{
+color:#00FF88;
+}
+.tag{
+display:inline-block;
+background:#0A0F1E;
+border:1px solid #00FF88;
+color:#00FF88;
+padding:2px 8px;
+border-radius:6px;
+font-size:12px;
+margin:2px 4px 2px 0;
+}
 /* FOOTER */
 footer{
 text-align:center;
@@ -133,19 +133,14 @@ border-top:1px solid #1E2D45;
 padding:20px;
 }
 </style>
-
 </head>
-
 <body>
-
 <div class="container">
-
 <!-- NAV -->
 <nav>
 <div class="logo">AI Meeting Notes</div>
 <a href="https://github.com">GitHub</a>
 </nav>
-
 <!-- HERO -->
 <div class="hero">
 <h1>AI Meeting Notes <span>Generator</span></h1>
@@ -153,7 +148,6 @@ padding:20px;
 Convert meeting transcripts into structured summaries using AI automation (n8n + Ollama).
 </p>
 </div>
-
 <!-- VALUE -->
 <h2>Why this project</h2>
 <div class="grid">
@@ -162,22 +156,15 @@ Convert meeting transcripts into structured summaries using AI automation (n8n +
 <div class="card">Uses local AI (Ollama)</div>
 <div class="card">Stores output in Sheets</div>
 </div>
-
 <!-- DEMO -->
 <h2>Live Demo</h2>
-
 <div class="demo">
-
-<textarea id="inputBox">John will finish login page by Friday. Sarah confirmed API is ready.</textarea>
-
+<textarea id="inputBox">Sara will conduct a meeting on DS at 2pm today. John will finish the login page by Friday. Sarah confirmed the API is ready.</textarea>
 <button onclick="generate()">Generate Notes</button>
-
 <div class="output" id="outputBox">
 Waiting for input...
 </div>
-
 </div>
-
 <!-- STACK -->
 <h2>Tech Stack</h2>
 <div class="grid">
@@ -186,25 +173,74 @@ Waiting for input...
 <div class="card">JavaScript</div>
 <div class="card">Google Sheets API</div>
 </div>
-
 <!-- FOOTER -->
 <footer>
 Built for AI Automation Portfolio
 </footer>
-
 </div>
-
 <script>
 function generate(){
-const text = document.getElementById("inputBox").value;
+const text = document.getElementById("inputBox").value.trim();
 
-document.getElementById("outputBox").innerHTML =
-"✔ Summary generated<br>" +
-"✔ Action items extracted<br>" +
-"✔ Owners identified<br><br>" +
-"<b>Input:</b><br>" + text;
+if(!text){
+  document.getElementById("outputBox").innerHTML = "Please enter a transcript to generate notes.";
+  return;
+}
+
+const sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 0);
+
+let actionItems = [];
+let people = new Set();
+
+const timeRegex = /\b(\d{1,2}(:\d{2})?\s?(am|pm|AM|PM))|today|tomorrow|tonight|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday\b/g;
+const actionRegex = /\bwill|confirmed|finish|conduct|complete|review|prepare|schedule|update|send|share\b/i;
+
+sentences.forEach(sentence => {
+  const nameMatch = sentence.match(/\b[A-Z][a-z]+\b/g);
+  if(nameMatch){
+    nameMatch.forEach(n => {
+      // ignore common sentence-starters that aren't names
+      const nonNames = ["The","This","That","Today","Tomorrow","Tonight","Meeting","Action",
+        "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday",
+        "January","February","March","April","May","June","July","August","September","October","November","December"];
+      if(!nonNames.includes(n)){
+        people.add(n);
+      }
+    });
+  }
+
+  const timeMatch = sentence.match(timeRegex);
+
+  if(actionRegex.test(sentence)){
+    actionItems.push({
+      text: sentence.trim(),
+      time: timeMatch ? timeMatch.join(", ") : "Not specified"
+    });
+  }
+});
+
+let output = "<b>Summary:</b><br>" + sentences.join(" ") + "<br><br>";
+
+output += "<b>Action Items:</b><br>";
+if(actionItems.length > 0){
+  actionItems.forEach(item => {
+    output += "• " + item.text + " <span class='tag'>" + item.time + "</span><br>";
+  });
+} else {
+  output += "No action items detected.<br>";
+}
+
+output += "<br><b>People Identified:</b><br>";
+if(people.size > 0){
+  Array.from(people).forEach(p => {
+    output += "<span class='tag'>" + p + "</span>";
+  });
+} else {
+  output += "None detected";
+}
+
+document.getElementById("outputBox").innerHTML = output;
 }
 </script>
-
 </body>
 </html>
